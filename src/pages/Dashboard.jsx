@@ -244,9 +244,9 @@ function Dashboard() {
         >
           <p className="font-medium text-lg text-[#364456]">Trading Accounts</p>
           <div className="pb-2">
-            {tradingAccounts.map((e) => (
+            {tradingAccounts.map((e,i) => (
               <div
-                key={e.id}
+                key={e.id + i}
                 className="mt-2  text-left border-2 border-[#f3f4f8] rounded-lg p-3 "
               >
                 <p className="font-medium text-[#364456]">{e.name}</p>
@@ -257,8 +257,8 @@ function Dashboard() {
                   <p className="text-[#747474]">{e.id}</p>
                 </div>
                 <div className="flex justify-between items-center mt-2 text-[#344154]">
-                  <p className="font-medium text-2xl">
-                    <span className="font-bold text-4xl mr-2">
+                  <p className="font-medium text-lg">
+                    <span className="font-bold text-3xl mr-2">
                       {e.balance.toFixed(2)}
                     </span>
                     USD

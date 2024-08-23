@@ -1,27 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import ditchDollar from "../assets/ditch-dollar.svg";
-
-
-
-import DashboardIcon from '../icons/DashboardIcon'
-import CRMIcon from '../icons/CRMIcon'
+import DashboardIcon from "../icons/DashboardIcon";
+import CRMIcon from "../icons/CRMIcon";
 import MAMIcon from "../icons/MAMIcon";
 import PAMMIcon from "../icons/PAMMIcon";
-import TradeIcon from '../icons/TradeIcon'
-import WalletIcon from '../icons/WallentIcon'
-import AccountIcon from'../icons/AccountIcon';
-import HistoryIcon from '../icons/HistoryIcon'
-
-import NotificationIcon from '../icons/NotificationIcon'
-import SettingsIcon from '../icons/SettingsIcon'
-import HelpSupportIcon from '../icons/HelpSupportIcon'
-import LogoutIcon from '../icons/LogoutIcon'
-
+import TradeIcon from "../icons/TradeIcon";
+import WalletIcon from "../icons/WallentIcon";
+import AccountIcon from "../icons/AccountIcon";
+import HistoryIcon from "../icons/HistoryIcon";
+import NotificationIcon from "../icons/NotificationIcon";
+import SettingsIcon from "../icons/SettingsIcon";
+import HelpSupportIcon from "../icons/HelpSupportIcon";
+import LogoutIcon from "../icons/LogoutIcon";
 import humanIcon from "../assets/humanIcon.svg";
-
-
-
-function Navbar() {
+import { NavLink } from "react-router-dom";
+function Navbar({activePage = '/dashboard'}) {
+ if(activePage == '/'){
+  activePage = '/dashboard'
+ }
+ console.log(activePage)
   const elements = [
     {
       title: "Dashboard",
@@ -29,7 +26,7 @@ function Navbar() {
     },
     {
       title: "CRM",
-      icon:CRMIcon,
+      icon: CRMIcon,
     },
     {
       title: "MAMM",
@@ -55,7 +52,7 @@ function Navbar() {
       title: "History",
       icon: HistoryIcon,
     },
-  ]
+  ];
   const options = [
     {
       title: "Notifications",
@@ -75,7 +72,7 @@ function Navbar() {
     },
   ];
   return (
-    <div className="fixed h-screen w-2/12 bg-[#9b76d6]  text-center ">
+    <div className="  fixed h-screen w-2/12 bg-[#9b76d6]  text-center ">
       &nbsp;
       <img
         src={ditchDollar}
@@ -84,13 +81,14 @@ function Navbar() {
       />
       <div className=" mt-6 ml-4 text-white">
         {elements.map((e) => (
-          <div
-            key={e.title}
-            className="flex my-1 gap-4 p-1  w-full items-center"
+         <NavLink to={`/${e.title.toLowerCase()}`}  key={e.title}>
+           <div
+            className={`flex   my-1 gap-4 p-1   w-full items-center ${activePage ? activePage.includes(e.title.toLowerCase()) ? 'text-[#BEFB7A] border-r-4 border-r-[#BEFB7A] bg-gradient-to-r from-transparent to-[#a2aba2]' : '' : '' }`}
           >
-            <e.icon />
+            <e.icon fill = {activePage ? activePage.includes(e.title.toLowerCase()) && "#BEFB7A" : ''  }/>
             <h4 className="">{e.title}</h4>
           </div>
+         </NavLink>
         ))}
       </div>
       <div className=" mt-12 ml-4 text-white">
@@ -99,7 +97,7 @@ function Navbar() {
             key={e.title}
             className="flex my-1 gap-4 p-1  w-full items-center"
           >
-            <e.icon/>
+            <e.icon />
             <h4 className="">{e.title}</h4>
           </div>
         ))}
@@ -115,5 +113,4 @@ function Navbar() {
     </div>
   );
 }
-
 export default Navbar;
