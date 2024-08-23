@@ -83,7 +83,7 @@ function Navbar({activePage = '/dashboard'}) {
         {elements.map((e) => (
          <NavLink to={`/${e.title.toLowerCase()}`}  key={e.title}>
            <div
-            className={`flex   my-1 gap-4 p-1   w-full items-center ${activePage ? activePage.includes(e.title.toLowerCase()) ? 'text-[#BEFB7A] border-r-4 border-r-[#BEFB7A] bg-gradient-to-r from-transparent to-[#a2aba2]' : '' : '' }`}
+            className={`flex  my-1 gap-4 p-1 -ml-1  w-full items-center ${activePage ? activePage.includes(e.title.toLowerCase()) ? 'text-[#BEFB7A] border-r-4 border-r-[#BEFB7A] bg-gradient-to-r from-transparent to-[#a2aba2]' : '' : '' }`}
           >
             <e.icon fill = {activePage ? activePage.includes(e.title.toLowerCase()) && "#BEFB7A" : ''  }/>
             <h4 className="">{e.title}</h4>
