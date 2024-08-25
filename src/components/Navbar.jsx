@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import ditchDollar from "../assets/ditch-dollar.svg";
 import DashboardIcon from "../icons/DashboardIcon";
 import CRMIcon from "../icons/CRMIcon";
@@ -14,11 +14,12 @@ import HelpSupportIcon from "../icons/HelpSupportIcon";
 import LogoutIcon from "../icons/LogoutIcon";
 import humanIcon from "../assets/humanIcon.svg";
 import { NavLink } from "react-router-dom";
+import { smallScreenContext } from "../contexts/SmallScreenProvider";
 function Navbar({activePage = '/dashboard'}) {
+  const  {isOpen , setIsOpen} = useContext(smallScreenContext)
  if(activePage == '/'){
   activePage = '/dashboard'
  }
- console.log(activePage)
   const elements = [
     {
       title: "Dashboard",
@@ -29,7 +30,7 @@ function Navbar({activePage = '/dashboard'}) {
       icon: CRMIcon,
     },
     {
-      title: "MAMM",
+      title: "MAM",
       icon: MAMIcon,
     },
     {
@@ -72,7 +73,7 @@ function Navbar({activePage = '/dashboard'}) {
     },
   ];
   return (
-    <div className="  fixed h-screen w-2/12 bg-[#9b76d6]  text-center ">
+    <div className={` overflow-y-auto fixed h-screen bg-[#9b76d6]  text-center  ${isOpen ? 'block min-[900px]:hidden  w-4/6  z-10 top-0 left-0 animate-slideInFromLeft' : "hidden min-[900px]:block  w-2/12  "}  `}>
       &nbsp;
       <img
         src={ditchDollar}
@@ -84,8 +85,9 @@ function Navbar({activePage = '/dashboard'}) {
          <NavLink to={`/${e.title.toLowerCase()}`}  key={e.title}>
            <div
             className={`flex  my-1 gap-4 p-1 -ml-1  w-full items-center ${activePage ? activePage.includes(e.title.toLowerCase()) ? 'text-[#BEFB7A] border-r-4 border-r-[#BEFB7A] bg-gradient-to-r from-transparent to-[#a2aba2]' : '' : '' }`}
+            onClick={()=>setIsOpen(false)}
           >
-            <e.icon fill = {activePage ? activePage.includes(e.title.toLowerCase()) && "#BEFB7A" : ''  }/>
+            <e.icon fill = {activePage ? activePage.includes(e.title.toLowerCase()) && "#BEFB7A" : ''  } height={8}/>
             <h4 className="">{e.title}</h4>
           </div>
          </NavLink>
@@ -97,13 +99,13 @@ function Navbar({activePage = '/dashboard'}) {
             key={e.title}
             className="flex my-1 gap-4 p-1  w-full items-center"
           >
-            <e.icon />
-            <h4 className="">{e.title}</h4>
+            <e.icon/>
+            <h4>{e.title}</h4>
           </div>
         ))}
       </div>
       <hr />
-      <div className=" truncate flex ml-4 mt-3 mr-2  gap-4   text-white  bottom-0 ">
+      <div className=" truncate flex ml-2 sm:ml-4 mt-1 mr-2  gap-2   text-white  bottom-0 ">
         <img src={humanIcon} alt="Human-Icon" />
         <div className="  truncate ">
           <p className="font-semibold">Shyam Shakur</p>
