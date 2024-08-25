@@ -19,7 +19,7 @@ function Header({ title = "Title", activePage }) {
       {!isMaxWidth900 &&
         (isOpen ? (
           <p
-            className="bg-red-100 py-1 px-5  rounded-md"
+            className="bg-red-100 py-1 px-5  rounded-md animate-slideInFromLeft"
             onClick={() => setIsOpen(false)}
           >
             Close
