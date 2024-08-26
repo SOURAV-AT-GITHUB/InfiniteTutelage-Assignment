@@ -15,11 +15,14 @@ import LogoutIcon from "../icons/LogoutIcon";
 import humanIcon from "../assets/humanIcon.svg";
 import { NavLink } from "react-router-dom";
 import { smallScreenContext } from "../contexts/SmallScreenProvider";
+import { useMediaQuery } from "@chakra-ui/react";
 function Navbar({ activePage = "/dashboard" }) {
   const { isOpen, setIsOpen } = useContext(smallScreenContext);
   if (activePage == "/") {
     activePage = "/dashboard";
   }
+  const [isMaxHeight750] =useMediaQuery('(max-height: 750px)')
+  const [isMaxHeight640] =useMediaQuery('(max-height: 640px)')
   const elements = [
     {
       title: "Dashboard",
@@ -74,23 +77,22 @@ function Navbar({ activePage = "/dashboard" }) {
   ];
   return (
     <div
-      className={` overflow-y-auto fixed h-screen bg-[#9b76d6]  text-center  ${
+      className={` grid fixed h-screen bg-[#9b76d6]  text-center  ${
         isOpen
           ? "block min-[900px]:hidden  w-4/6  z-10 top-0 left-0 animate-slideInFromLeft"
           : "hidden min-[900px]:block  w-2/12  "
       }  `}
     >
-      &nbsp;
       <img
         src={ditchDollar}
         alt="ditch-dollar"
-        className="h-16 text-center  m-auto "
+        className={`${isMaxHeight640 ? "h-10" :  isMaxHeight750 ? 'h-14' : 'h-16'} text-center  m-auto mt-2`}
       />
-      <div className=" mt-6 ml-4 text-white">
+      <div className={`${isMaxHeight750 ? 'mt-2' : 'mt-6'} ml-4 text-white `}>
         {elements.map((e) => (
           <NavLink to={`/${e.title.toLowerCase()}`} key={e.title}>
             <div
-              className={`flex  my-1 gap-4 p-1 -ml-1  w-full items-center ${
+              className={`flex  ${isMaxHeight640 ? 'p-0 text-sm' :'p-1'}  ${isMaxHeight750 ? 'my-0' : 'my-1'} gap-4  -ml-1  w-full items-center bg ${
                 activePage
                   ? activePage.includes(e.title.toLowerCase())
                     ? "text-[#BEFB7A] border-r-4 border-r-[#BEFB7A] bg-gradient-to-r from-transparent to-[#a2aba2]"
@@ -112,11 +114,13 @@ function Navbar({ activePage = "/dashboard" }) {
           </NavLink>
         ))}
       </div>
-      <div className=" mt-12 ml-4 text-white">
+      <div className="truncate self-end">
+
+      <div className={` ${isMaxHeight750 ? 'mt-4' : 'mt-12'} ml-4 text-white`}>
         {options.map((e) => (
           <div
             key={e.title}
-            className="flex my-1 gap-4 p-1  w-full items-center"
+            className={`flex ${isMaxHeight750 ? 'my-0' : 'my-1'} gap-4 ${isMaxHeight640 ? 'p-0 text-sm' :'p-1 '} w-full items-center`}
           >
             <e.icon />
             <h4>{e.title}</h4>
@@ -124,13 +128,15 @@ function Navbar({ activePage = "/dashboard" }) {
         ))}
       </div>
       <hr />
-      <div className=" truncate flex ml-2 sm:ml-4 mt-1 mr-2  gap-2   text-white  bottom-0 ">
+      <div className="items-center truncate flex ml-2 sm:ml-4 mt-1 mr-2  gap-2  text-white  ">
         <img src={humanIcon} alt="Human-Icon" />
         <div className="  truncate ">
           <p className="font-semibold">Shyam Shakur</p>
           <p className="truncate">&nbsp;shyam01.shankur@masaischool.com</p>
         </div>
       </div>
+      </div>
+        
     </div>
   );
 }

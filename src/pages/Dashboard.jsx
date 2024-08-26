@@ -158,7 +158,7 @@ function Dashboard() {
     },
   ];
   return (
-    <div className="w-full  min-[900px]:w-10/12 mt-20 min-[900px]:mt-16  text-right static  min-[900px]:absolute right-0 ">
+    <div className="w-full  min-[900px]:w-10/12 mt-20 min-[900px]:mt-14  text-right static  min-[900px]:absolute right-0 ">
       <Header title={"Dashboard"} />
       <main
         className="block  sm:flex gap-0   min-[900px]:gap-6  text-center  w-12/12"
