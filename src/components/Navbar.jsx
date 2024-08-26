@@ -83,10 +83,11 @@ function Navbar({ activePage = "/dashboard" }) {
           : "hidden min-[900px]:block  w-2/12  "
       }  `}
     >
+      
       <img
         src={ditchDollar}
         alt="ditch-dollar"
-        className={`${isMaxHeight640 ? "h-10" :  isMaxHeight750 ? 'h-14' : 'h-16'} text-center  m-auto mt-2`}
+        className={`${isMaxHeight640 ? "h-10" :  isMaxHeight750 ? 'h-14' : 'h-16'} text-center  m-auto mt-6`}
       />
       <div className={`${isMaxHeight750 ? 'mt-2' : 'mt-6'} ml-4 text-white `}>
         {elements.map((e) => (
